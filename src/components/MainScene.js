@@ -14,6 +14,13 @@ import pointedflapleft from "./Trouser fabric/pointed-flap-left.PNG"
 import pointedflapright from "./Trouser fabric/pointed-flap-right.PNG"
 import standardflapleft from "./Trouser fabric/standard-flap-left.png"
 import standardflapright from "./Trouser fabric/standard-flap-right.png"
+import bottomcuff from "./Trouser fabric/bottom-cuff.PNG"
+import bottomfrontcuff1 from "./Trouser fabric/bottom-front-cuff1.PNG"
+import bottomfrontcuff2 from "./Trouser fabric/bottom-front-cuff2.PNG"
+import bottompant from "./Trouser fabric/bottom-pant.PNG"
+import bottomvent from "./Trouser fabric/bottom-vents.PNG"
+import bottompant3 from "./Trouser fabric/bottom-pant-3.PNG"
+
 import nopocket from "./Trouser fabric/no-pocket.PNG"
 function MainScenes() {
   const [selectedComponent, setSelectedComponent] = useState('Trousers');
@@ -132,7 +139,7 @@ function MainScenes() {
           <OrbitControls />
         </Canvas>
       </div>
-      <div className="lg:w-[25%] md:w-[30%] w-[35%] overflow-hidden shadow-white shadow-lg" style={{ backgroundImage: `url(${backimg})`, backgroundSize: 'cover' }}>
+      <div className="lg:w-[25%] md:w-[30%] w-[35%] overflow-hidden shadow-white shadow-lg bg-black">
         <div className="flex justify-center items-center mt-12 mb-12">
           <button className="justify-center glowing-btn h-[80px] w-[85%]">
             <div className='lg:flex md:flex'>
@@ -141,7 +148,7 @@ function MainScenes() {
             </div>
           </button>
         </div>
-        <div className="dropdown z-10 mt-[100px]">
+        <div className="dropdown z-10 mt-[100px] shadow-white shadow-sm">
           <label htmlFor="dropdown" className="dropdown-btn  opacity-80">
             <span className="flex justify-center">{productType}</span>
             <span className="arrow"></span>
@@ -154,7 +161,7 @@ function MainScenes() {
           </ul>
         </div>
 
-        <div className="border-solid border-2 opacity-80 bg-[#1E222A] border-[#A6A6A6] h-100 mx-5 p-5 rounded-md flex flex-col mt-[50px]">
+        <div className="border-solid border-2 opacity-80  shadow-white shadow-md bg-[#000000] border-[#A6A6A6] h-100 mx-5 p-5 rounded-md flex flex-col mt-[50px]">
           <article className="text-white flex justify-center text-[28px] mb-5 mt-4 glowing-title font-bold">FABRIC SELECTION</article>
 
           <div className="border-solid border-2 bg-[#1E222A] border-[#a89e9e] mx-1 rounded-md inline-flex overflow-clip overscroll-x-auto">
@@ -178,7 +185,7 @@ function MainScenes() {
 
         </div>
 
-        <div className="flex border-solid border-2 opacity-80 bg-[#1E222A] border-[#A6A6A6] h-100 mx-5 mt-[20px] p-5 rounded-md flex-col h-[460px]">
+        <div className="flex border-solid border-2 opacity-80 shadow-white shadow-md bg-[#000000] border-[#A6A6A6] h-100 mx-5 mt-[20px] p-5 rounded-md flex-col h-[460px]">
 
           <article className="text-white flex items-center justify-center text-[28px] mb-5 mt-4 glowing-title font-bold">Style  Option</article>
           <div className='grid grid-cols-3 grid-rows-4 items-center'>
@@ -188,17 +195,15 @@ function MainScenes() {
               <input type="radio" name="flap" onChange={() => handleStyleChange(0)} />
               <span className="checkmark"></span>
             </label>
-            <Tooltip id="my-tooltip-left" className='opacity-100' >
+            <Tooltip id="my-tooltip-left" className='opacity-100 justify-center items-center' >
             <div>
-    <img src={halfpointedright} alt="Cat" />
-    <span>Tooltip Text</span>
-  </div>
+            <img src={halfpointedright} alt="Cat"  className='w-[100px]'/>
+            <span >T32K2</span>
+          </div>
             </Tooltip>
             <label
               className="container text-white"
               data-tooltip-id="my-tooltip-right"
-              data-tooltip-html={`<img src="${halfpointedleft}" alt="Cat"/>`}
-              data-tooltip-content="Left Flap"
               data-tooltip-place="top"
             >
               Left
@@ -206,44 +211,71 @@ function MainScenes() {
               <span className="checkmark"></span>
             </label>
             <Tooltip id="my-tooltip-right" className="opacity-100">
-              <img src={halfpointedleft} alt="Cat" />
+              <div>
+              <img src={halfpointedleft} alt="Cat"  className='w-[100px]'/>
+                <span>T32K3</span>
+              </div>
             </Tooltip>
-            <div className="text-white text-[13px] mt-[10px]">HALF POINTED</div>
-            <label className="container text-white  mt-[10px]">Right
+            <div className="text-white text-[13px] mt-[10px]" >HALF POINTED</div>
+            <label className="container text-white  mt-[10px]"  data-tooltip-id="my-htooltip-right" data-tooltip-place="top">Right
               <input type="radio" name="flap" onChange={() => handleStyleChange(2)} />
               <span className="checkmark"></span>
             </label>
-            <Tooltip id="my-tooltip" className='opacity-100' >
-              <img src={halfpointedleft} alt="Cat" />
+            <Tooltip id="my-htooltip-right" className='opacity-100' >
+              <div>
+                <img src={pointedflapright} alt="Cat"  className='w-[100px]'/>
+                <span>T32H9</span>
+              </div>
             </Tooltip>
-            <label className="container text-white   mt-[10px]">Left
+            <label className="container text-white   mt-[10px]"  data-tooltip-id="my-htooltip-left" data-tooltip-place="top">Left
               <input type="radio" name="flap" onChange={() => handleStyleChange(3)} />
               <span className="checkmark"></span>
             </label>
-            <Tooltip id="my-tooltip" className='opacity-100' >
-              <img src={halfpointedleft} alt="Cat" />
+            <Tooltip id="my-htooltip-left" className='opacity-100' >
+              <div>
+              <img src={pointedflapleft} alt="Cat"  className='w-[100px]'/>
+              <span>T32J1</span>
+              </div>
             </Tooltip>
             <div className="text-white text-[13px]  mt-[10px]">POINTED FLAP</div>
-            <label className="container text-white  mt-[10px]">Right
+            <label className="container text-white  mt-[10px]" data-tooltip-id="my-stooltip-right" data-tooltip-place="top">Right
               <input type="radio" name="flap" onChange={() => handleStyleChange(4)} />
               <span className="checkmark"></span>
             </label>
-            <label className="container text-white mt-[10px]">Left
+            <Tooltip id="my-stooltip-right" className='opacity-100' >
+              <div>
+              <img src={standardflapright} alt="Cat"  className='w-[100px]'/>
+              <span>T32K6</span>
+              </div>
+            </Tooltip>
+            <label className="container text-white mt-[10px]" data-tooltip-id="my-stooltip-left" data-tooltip-place="top">Left
               <input type="radio" name="flap" onChange={() => handleStyleChange(5)} />
               <span className="checkmark"></span>
             </label>
+            <Tooltip id="my-stooltip-left" className='opacity-100' >
+              <div>
+              <img src={standardflapleft} alt="Cat"  className='w-[100px]'/>
+              <span>T32K7</span>
+              </div>
+            </Tooltip>
             <div className="text-white mt-[10px]">NO</div>
-            <label className="container text-white mt-[10px]">NO
+            <label className="container text-white mt-[10px]" data-tooltip-id="my-htooltip-No" data-tooltip-place="top">NO
               <input type="radio" name="flap" onChange={() => handleStyleChange(8)} />
               <span className="checkmark"></span>
             </label>
+            <Tooltip id="my-htooltip-No" className='opacity-100' >
+              <div>
+              <img src={nopocket} alt="Cat"  className='w-[100px]'/>
+              <span>T3200</span>
+              </div>
+            </Tooltip>
             <span></span>
             <div className="text-white text-[13px] mt-[10px]">TICKET POCKET</div>
-            <label className="container text-white mt-[10px]">Horizontal
+            <label className="container text-white mt-[10px]" data-tooltip-id="my-htooltip-right" data-tooltip-place="top"> Horizontal
               <input type="radio" name="ticket" onChange={() => handleStyleChange(6)} />
               <span className="checkmark"></span>
             </label>
-            <label className="container text-white mt-[10px]">Vertical
+            <label className="container text-white mt-[10px]" data-tooltip-id="my-htooltip-right" data-tooltip-place="top">Vertical
               <input type="radio" name="ticket" onChange={() => handleStyleChange(7)} />
               <span className="checkmark"></span>
             </label>
@@ -251,31 +283,67 @@ function MainScenes() {
           </div>
           <div className='grid grid-cols-4 grid-rows-2 flex items-center'>
             <div className="text-white text-[13px] mt-[10px]">BOTTOM STYLE</div>
-            <label className="container text-white text-[8px] mt-[10px]">T-3620
+            <label className="container text-white text-[8px] mt-[10px]" data-tooltip-id="my-bottom-vent" data-tooltip-place="top">T-3620
               <input type="radio" name="bottom" onChange={() => handleStyleChange(9)} />
               <span className="checkmark"></span>
             </label>
-            <label className="container text-white mt-[10px]">T-3621
+            <Tooltip id="my-bottom-vent" className='opacity-100' >
+              <div>
+              <img src={bottomvent} alt="Cat" className='w-[100px]' />
+              <span>T-3620</span>
+              </div>
+            </Tooltip>
+            <label className="container text-white mt-[10px]" data-tooltip-id="my-bottom-pant" data-tooltip-place="top">T-3621
               <input type="radio" name="bottom" onChange={() => handleStyleChange(10)} />
               <span className="checkmark"></span>
             </label>
-            <label className="container text-white mt-[10px]">T-362A
+            <Tooltip id="my-bottom-pant" className='opacity-100' >
+              <div>
+              <img src={bottompant} alt="Cat" className='w-[100px]' />
+              <span>T-3621</span>
+              </div>
+            </Tooltip>
+            <label className="container text-white mt-[10px]" data-tooltip-id="my-bottom-pant3" data-tooltip-place="top">T-362A
               <input type="radio" name="bottom" onChange={() => handleStyleChange(11)} />
               <span className="checkmark"></span>
             </label>
+            <Tooltip id="my-bottom-pant3" className='opacity-100' >
+              <div>
+              <img src={bottompant3} alt="Cat" className='w-[100px]' />
+              <span>T-362A</span>
+              </div>
+            </Tooltip>
             <div className="text-white text-[13px] mt-[10px]">CUFF STYLE</div>
-            <label className="container text-white text-[8px] mt-[10px]">T-3605
+            <label className="container text-white text-[8px] mt-[10px]" data-tooltip-id="my-bottom-cuff" data-tooltip-place="top">T-3605
               <input type="radio" name="bottom" onChange={() => handleStyleChange(12)} />
               <span className="checkmark"></span>
             </label>
-            <label className="container text-white mt-[10px]">T-3606
+            <Tooltip id="my-bottom-cuff" className='opacity-100' >
+              <div>
+              <img src={bottomcuff} alt="Cat" className='w-[100px]' />
+              <span>T-3605</span>
+              </div>
+            </Tooltip>
+            <label className="container text-white mt-[10px]" data-tooltip-id="my-bottom-front1" data-tooltip-place="top">T-3606
               <input type="radio" name="bottom" onChange={() => handleStyleChange(13)} />
               <span className="checkmark"></span>
             </label>
-            <label className="container text-white mt-[10px]">T-3627
+            <Tooltip id="my-bottom-front1" className='opacity-100' >
+              <div>
+              <img src={bottomfrontcuff1} alt="Cat" className='w-[100px]' />
+              <span>T-3606</span>
+              </div>
+            </Tooltip>
+            <label className="container text-white mt-[10px]" data-tooltip-id="my-bottom-front2" data-tooltip-place="top">T-3627
               <input type="radio" name="bottom" onChange={() => handleStyleChange(14)} />
               <span className="checkmark"></span>
             </label>
+            <Tooltip id="my-bottom-front2" className='opacity-100' >
+              <div>
+              <img src={bottomfrontcuff2} alt="Cat" className='w-[100px]' />
+              <span>T-3627</span>
+              </div>
+            </Tooltip>
           </div>
         </div>
 
