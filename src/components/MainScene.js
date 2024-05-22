@@ -214,7 +214,7 @@ function MainScenes() {
           <article className="text-white flex items-center justify-center text-[28px] mb-5 mt-4 font-bold">Style  Option</article>
           <div className='grid grid-cols-3 grid-rows-4 items-center'>
             <div className="text-white text-[13px]" >STANDARD FLAP</div>
-            <label className="container text-white" data-tooltip-id="my-tooltip-left" data-tooltip-place="top"  class="option-input">
+            <label className="container text-white" data-tooltip-id="my-tooltip-left" data-tooltip-place="top">
               Right
               <input type="radio" name="flap" onChange={() => handleStyleChange(0)}/>
               <span className="checkmark"></span>
