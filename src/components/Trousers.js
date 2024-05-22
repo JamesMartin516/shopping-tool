@@ -9,18 +9,18 @@ import * as THREE from 'three';
 import state from "../state";
 import { Html } from '@react-three/drei';
 
-export const Trousers = ({ fabricIndex, styleIndex }) => {
+export const Trousers = ({ fabricIndex, styleIndex, styleIndex1, styleIndex2 }) => {
   const [hovered, setHovered] = useState(null);
   const group = useRef();
   const inputRef = useRef();
   const [indeximg, setIndeximg] = useState(0);
   const snap = useSnapshot(state);
-  const { nodes, materials } = useGLTF("trousertotal3.glb");
+  const { nodes, materials } = useGLTF("pra.glb");
   const { camera } = useThree();
   useEffect(() => {
-    camera.position.set(0, 1, 50); // Adjust these values to change the camera position
-    camera.lookAt(0, 0, 0); // Look at the center of the scene
-    camera.fov = 75;
+    camera.position.set(0, 20, 35); // Adjust these values to change the camera position
+    camera.lookAt(0, 20, 0); // Look at the center of the scene
+    camera.fov = 65;
     camera.updateProjectionMatrix();
   }, [camera]);
 
@@ -40,7 +40,15 @@ export const Trousers = ({ fabricIndex, styleIndex }) => {
   });
 
   const fabricmaterial = textures.map(texture => new THREE.MeshStandardMaterial({ map: texture }));
+  const texturesat = images.map(image => {
+    const texture = textureLoader.load(image);
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    texture.repeat.set(100, 100);
+    return texture;
+  });
 
+  const fabricmaterialat = texturesat.map(texture => new THREE.MeshStandardMaterial({ map: texture }));
   console.log("images:", images);
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -62,51 +70,148 @@ export const Trousers = ({ fabricIndex, styleIndex }) => {
       </Html>
       <group ref={group}>
         <mesh castShadow receiveShadow>
-          <mesh
+        <mesh
             material-color={snap.items.laces}
             material={fabricmaterial[fabricIndex]}
-            geometry={nodes.ATT.geometry}
+            geometry={nodes.trouser004.geometry}
           />
-          <mesh
+                    <mesh
             material-color={snap.items.laces}
             material={fabricmaterial[fabricIndex]}
-            geometry={nodes.ATT_1.geometry}
+            geometry={nodes.trouser004_1.geometry}
           />
-          <mesh
+       <mesh
             material-color={snap.items.laces}
             material={fabricmaterial[fabricIndex]}
-            geometry={nodes.centerpocket_left.geometry}
-            visible={styleIndex[5]}
-          />
-          <mesh
-            material-color={snap.items.laces}
-            material={fabricmaterial[fabricIndex]}
-            geometry={nodes.centerpocket_right.geometry}
+            geometry={nodes.leftbackhalf.geometry}
             visible={styleIndex[0]}
           />
           <mesh
             material-color={snap.items.laces}
             material={fabricmaterial[fabricIndex]}
-            geometry={nodes.nocenterpocket_left.geometry}
+            geometry={nodes.rightbackhalf.geometry}
             visible={styleIndex[1]}
           />
           <mesh
             material-color={snap.items.laces}
             material={fabricmaterial[fabricIndex]}
-            geometry={nodes.nocenterpocket_right.geometry}
+            geometry={nodes.leftcenterback.geometry}
             visible={styleIndex[2]}
           />
           <mesh
             material-color={snap.items.laces}
             material={fabricmaterial[fabricIndex]}
-            geometry={nodes.pocket_left.geometry}
+            geometry={nodes.rightcenterback.geometry}
             visible={styleIndex[3]}
           />
           <mesh
             material-color={snap.items.laces}
             material={fabricmaterial[fabricIndex]}
-            geometry={nodes.pocket_right.geometry}
+            geometry={nodes.leftnocenterback.geometry}
             visible={styleIndex[4]}
+          />
+          <mesh
+            material-color={snap.items.laces}
+            material={fabricmaterial[fabricIndex]}
+            geometry={nodes.rightnocenterback.geometry}
+            visible={styleIndex[5]}
+          />
+          <mesh
+            material-color={snap.items.laces}
+            material={fabricmaterial[fabricIndex]}
+            geometry={nodes.ticketleft.geometry}
+            visible={styleIndex1[0]}
+          />
+          <mesh
+            material-color={snap.items.laces}
+            material={fabricmaterial[fabricIndex]}
+            geometry={nodes.ticketleft001.geometry}
+            visible={styleIndex1[1]}
+          />
+          <mesh
+            material-color={snap.items.laces}
+            material={fabricmaterial[fabricIndex]}
+            geometry={nodes.ticketright.geometry}
+            visible={styleIndex1[0]}
+          />
+          <mesh
+            material-color={snap.items.laces}
+            material={fabricmaterial[fabricIndex]}
+            geometry={nodes.ticketright001.geometry}
+            visible={styleIndex1[1]}
+          />
+           <mesh
+            material-color={snap.items.laces}
+            material={fabricmaterial[fabricIndex]}
+            geometry={nodes.trouser003.geometry}
+            visible={styleIndex2[0]}
+          />
+          <mesh
+            material-color={snap.items.laces}
+            material={fabricmaterial[fabricIndex]}
+            geometry={nodes.trouser003_1.geometry}
+            visible={styleIndex2[0]}
+          />
+          <mesh
+            material-color={snap.items.laces}
+            material={fabricmaterial[fabricIndex]}
+            geometry={nodes.trouser002.geometry}
+            visible={styleIndex2[1]}
+          />
+          <mesh
+            material-color={snap.items.laces}
+            material={fabricmaterial[fabricIndex]}
+            geometry={nodes.trouser002_1.geometry}
+            visible={styleIndex2[1]}
+          />      
+          <mesh
+            material-color={snap.items.laces}
+            material={fabricmaterial[fabricIndex]}
+            geometry={nodes.trouser001.geometry}
+            visible={styleIndex2[2]}
+          />          
+          <mesh
+            material-color={snap.items.laces}
+            material={fabricmaterial[fabricIndex]}
+            geometry={nodes.trouser001_1.geometry}
+            visible={styleIndex2[2]}
+          />
+
+          <mesh
+            material-color={snap.items.laces}
+            material={fabricmaterialat[fabricIndex]}
+            geometry={nodes.cuff.geometry}
+            visible={styleIndex2[3]}
+          />
+          <mesh
+            material-color={snap.items.laces}
+            material={fabricmaterialat[fabricIndex]}
+            geometry={nodes.cuff_1.geometry}
+            visible={styleIndex2[3]}
+          />
+          <mesh
+            material-color={snap.items.laces}
+            material={fabricmaterialat[fabricIndex]}
+            geometry={nodes.cuff1.geometry}
+            visible={styleIndex2[4]}
+          />
+          <mesh
+            material-color={snap.items.laces}
+            material={fabricmaterialat[fabricIndex]}
+            geometry={nodes.cuff1_1.geometry}
+            visible={styleIndex2[4]}
+          />
+          <mesh
+            material-color={snap.items.laces}
+            material={fabricmaterialat[fabricIndex]}
+            geometry={nodes.cuff2.geometry}
+            visible={styleIndex2[5]}
+          />
+          <mesh
+            material-color={snap.items.laces}
+            material={fabricmaterialat[fabricIndex]}
+            geometry={nodes.cuff2_1.geometry}
+            visible={styleIndex2[5]}
           />
         </mesh>
       </group>

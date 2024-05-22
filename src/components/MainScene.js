@@ -20,12 +20,17 @@ import bottomfrontcuff2 from "./Trouser fabric/bottom-front-cuff2.PNG"
 import bottompant from "./Trouser fabric/bottom-pant.PNG"
 import bottomvent from "./Trouser fabric/bottom-vents.PNG"
 import bottompant3 from "./Trouser fabric/bottom-pant-3.PNG"
+import ticketpointhor from "./Trouser fabric/ticket-pocket-left.PNG"
+import ticketpointver from "./Trouser fabric/ticket-pocket-vertical.PNG"
 
 import nopocket from "./Trouser fabric/no-pocket.PNG"
 function MainScenes() {
   const [selectedComponent, setSelectedComponent] = useState('Trousers');
   const [fabricIndex, setFabricIndex] = useState(0);
   const [styleIndex, setStyleIndex] = useState([true, false, false, false, false, false, false]);
+  const [styleIndex1, setStyleIndex1] = useState([true, false]);
+  const [styleIndex2, setStyleIndex2] = useState([true, false, false, false, false, false]);
+
   const [productType, setProductType] = useState('Trousers');
   const [image, setImage] = useState(null);
   const fileInputRef = useRef(null);
@@ -104,12 +109,30 @@ function MainScenes() {
     a[number] = true;
     setStyleIndex(a);
   };
+  const handleStyleChange1 = (number) => {
+    console.log("number:", number);
+    for (let j = 0; j < 2; j++) {
+      a[j] = false;
+    }
+    a[number] = true;
+    setStyleIndex1(a);
+  };
+  const handleStyleChange2 = (number) => {
+    console.log("number:", number);
+    for (let j = 0; j < 6; j++) {
+      a[j] = false;
+    }
+    if(number>2){a[0]=true;}
+    
+    a[number] = true;
+    setStyleIndex2(a);
+  };
 
   const images = importAll(require.context('./Trouser fabric', false, /\.jpg$/));
   return (
-    <div className="flex h-full">
+    <div className="md:flex h-full shadow-sm shadow-white">
       {/* Canvas Container */}
-      <div className="flex-grow lg:w-[80%] md:w-[70%] w-[60%] bg-[#141720]">
+      <div className="flex-grow md:w-[70%] w-[100%] md:h-[100%] h-[55%] bg-[#141720]">
         <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 4], fov: 50 }}>
           <directionalLight
             position={[0, -1000, -1000]}
@@ -121,10 +144,10 @@ function MainScenes() {
             intensity={0.1}
           />
           <Suspense fallback={null}>
-            {selectedComponent === 'Trousers' && <Trousers fabricIndex={fabricIndex} styleIndex={styleIndex} />}
+            {selectedComponent === 'Trousers' && <Trousers fabricIndex={fabricIndex} styleIndex={styleIndex}  styleIndex1={styleIndex1} styleIndex2={styleIndex2}/>}
             {selectedComponent === 'Joggers' && <Joggers />}
             {selectedComponent === 'Teeshirt' && <Teeshirt fabricIndex={fabricIndex} />}
-            {selectedComponent === 'Shorts' && <Shorts fabricIndex={fabricIndex} />}
+            {selectedComponent === 'Shorts' && <Shorts fabricIndex={fabricIndex} styleIndex={styleIndex} styleIndex1={styleIndex1} styleIndex2={styleIndex2}/>}
             <Environment preset="city" />
             <ContactShadows
               rotation-x={Math.PI / 2}
@@ -139,8 +162,8 @@ function MainScenes() {
           <OrbitControls />
         </Canvas>
       </div>
-      <div className="lg:w-[25%] md:w-[30%] w-[35%] overflow-hidden shadow-white shadow-lg bg-black">
-        <div className="flex justify-center items-center mt-12 mb-12">
+      <div className="md:w-[25%] w-[100%] md:h-[100%] h-[45%] overflow-hidden shadow-white shadow-lg bg-black overflow-y-auto">
+        <div className="flex justify-center items-center mt-2 md:mt-12 mb-2 md:mb-12">
           <button className="justify-center glowing-btn h-[80px] w-[85%]">
             <div className='lg:flex md:flex'>
               <span className=" font-[50px]">Online</span>
@@ -148,25 +171,26 @@ function MainScenes() {
             </div>
           </button>
         </div>
-        <div className="dropdown z-10 mt-[100px] shadow-white shadow-sm">
+        <div className="dropdown z-10 mt-[50px]">
           <label htmlFor="dropdown" className="dropdown-btn  opacity-80">
             <span className="flex justify-center">{productType}</span>
             <span className="arrow"></span>
           </label>
           <ul className="dropdown-content opacity-90" role="menu">
-            <li><button onClick={() => handleComponentChange('Trousers')} className="w-[100%] h-12  text-white">Trousers</button></li>
-            <li><button onClick={() => handleComponentChange('Joggers')} className="w-[100%] h-12 text-white">Joggers</button></li>
-            <li><button onClick={() => handleComponentChange('Teeshirt')} className="w-[100%] h-12 text-white">Teeshirts</button></li>
-            <li><button onClick={() => handleComponentChange('Shorts')} className="w-[100%] h-12 text-white">Shorts</button></li>
+            <li><button onClick={() => handleComponentChange('Trousers')} className="w-[100%] h-5 md:h-12  text-white">Trousers</button></li>
+            <li><button onClick={() => handleComponentChange('Joggers')} className="w-[100%] h-5 md:h-12 text-white">Joggers</button></li>
+            <li><button onClick={() => handleComponentChange('Teeshirt')} className="w-[100%] h-5 md:h-12 text-white">Teeshirts</button></li>
+            <li><button onClick={() => handleComponentChange('Shorts')} className="w-[100%] h-5 md:h-12 text-white">Shorts</button></li>
           </ul>
         </div>
 
-        <div className="border-solid border-2 opacity-80  shadow-white shadow-md bg-[#000000] border-[#A6A6A6] h-100 mx-5 p-5 rounded-md flex flex-col mt-[50px]">
-          <article className="text-white flex justify-center text-[28px] mb-5 mt-4 glowing-title font-bold">FABRIC SELECTION</article>
+        <div className="border-solid border-2 opacity-80 md:h-[180px]  shadow-white shadow-md bg-[#000000] border-[#A6A6A6] h-100 mx-5 p-5 rounded-md flex flex-col mt-[10px] md:mt-[50px]">
+          <article className="text-white flex justify-center text-[20px] md:text-[28px] mb-5 mt-[-10px] md:mt-4 font-bold">FABRIC SELECTION</article>
 
           <div className="border-solid border-2 bg-[#1E222A] border-[#a89e9e] mx-1 rounded-md inline-flex overflow-clip overscroll-x-auto">
 
             {images.map((img, index) => (
+              
               <button key={index} onClick={() => selectFabric(index, img)} className='h-[50px] w-[300px]' >
                 <img src={img} alt={`Image ${index + 1}`} className='h-[100px] w-[100px]' />
                 {console.log(index)}
@@ -187,12 +211,12 @@ function MainScenes() {
 
         <div className="flex border-solid border-2 opacity-80 shadow-white shadow-md bg-[#000000] border-[#A6A6A6] h-100 mx-5 mt-[20px] p-5 rounded-md flex-col h-[460px]">
 
-          <article className="text-white flex items-center justify-center text-[28px] mb-5 mt-4 glowing-title font-bold">Style  Option</article>
+          <article className="text-white flex items-center justify-center text-[28px] mb-5 mt-4 font-bold">Style  Option</article>
           <div className='grid grid-cols-3 grid-rows-4 items-center'>
             <div className="text-white text-[13px]" >STANDARD FLAP</div>
-            <label className="container text-white" data-tooltip-id="my-tooltip-left" data-tooltip-place="top">
+            <label className="container text-white" data-tooltip-id="my-tooltip-left" data-tooltip-place="top"  class="option-input">
               Right
-              <input type="radio" name="flap" onChange={() => handleStyleChange(0)} />
+              <input type="radio" name="flap" onChange={() => handleStyleChange(0)}/>
               <span className="checkmark"></span>
             </label>
             <Tooltip id="my-tooltip-left" className='opacity-100 justify-center items-center' >
@@ -260,7 +284,7 @@ function MainScenes() {
             </Tooltip>
             <div className="text-white mt-[10px]">NO</div>
             <label className="container text-white mt-[10px]" data-tooltip-id="my-htooltip-No" data-tooltip-place="top">NO
-              <input type="radio" name="flap" onChange={() => handleStyleChange(8)} />
+              <input type="radio" name="flap" onChange={() => handleStyleChange(6)} />
               <span className="checkmark"></span>
             </label>
             <Tooltip id="my-htooltip-No" className='opacity-100' >
@@ -271,20 +295,31 @@ function MainScenes() {
             </Tooltip>
             <span></span>
             <div className="text-white text-[13px] mt-[10px]">TICKET POCKET</div>
-            <label className="container text-white mt-[10px]" data-tooltip-id="my-htooltip-right" data-tooltip-place="top"> Horizontal
-              <input type="radio" name="ticket" onChange={() => handleStyleChange(6)} />
+            <label className="container text-white mt-[10px]" data-tooltip-id="my-ticket-pocket-h" data-tooltip-place="top"> Horizontal
+              <input type="radio" name="ticket" onChange={() => handleStyleChange1(0)} />
               <span className="checkmark"></span>
             </label>
-            <label className="container text-white mt-[10px]" data-tooltip-id="my-htooltip-right" data-tooltip-place="top">Vertical
-              <input type="radio" name="ticket" onChange={() => handleStyleChange(7)} />
+            <Tooltip id="my-ticket-pocket-h" className='opacity-100' >
+              <div>
+              <img src={ticketpointhor} alt="Cat"  className='w-[100px]'/>
+              <span>Ticket Horizontal</span>
+              </div>
+            </Tooltip>
+            <label className="container text-white mt-[10px]" data-tooltip-id="my-ticket-pocket-v" data-tooltip-place="top">Vertical
+              <input type="radio" name="ticket" onChange={() => handleStyleChange1(1)} />
               <span className="checkmark"></span>
             </label>
-
+            <Tooltip id="my-ticket-pocket-v" className='opacity-100' >
+              <div>
+              <img src={ticketpointver} alt="Cat"  className='w-[100px]'/>
+              <span>Ticket Vertical</span>
+              </div>
+            </Tooltip>
           </div>
           <div className='grid grid-cols-4 grid-rows-2 flex items-center'>
             <div className="text-white text-[13px] mt-[10px]">BOTTOM STYLE</div>
             <label className="container text-white text-[8px] mt-[10px]" data-tooltip-id="my-bottom-vent" data-tooltip-place="top">T-3620
-              <input type="radio" name="bottom" onChange={() => handleStyleChange(9)} />
+              <input type="radio" name="bottom" onChange={() => handleStyleChange2(0)} />
               <span className="checkmark"></span>
             </label>
             <Tooltip id="my-bottom-vent" className='opacity-100' >
@@ -294,7 +329,7 @@ function MainScenes() {
               </div>
             </Tooltip>
             <label className="container text-white mt-[10px]" data-tooltip-id="my-bottom-pant" data-tooltip-place="top">T-3621
-              <input type="radio" name="bottom" onChange={() => handleStyleChange(10)} />
+              <input type="radio" name="bottom" onChange={() => handleStyleChange2(1)} />
               <span className="checkmark"></span>
             </label>
             <Tooltip id="my-bottom-pant" className='opacity-100' >
@@ -304,7 +339,7 @@ function MainScenes() {
               </div>
             </Tooltip>
             <label className="container text-white mt-[10px]" data-tooltip-id="my-bottom-pant3" data-tooltip-place="top">T-362A
-              <input type="radio" name="bottom" onChange={() => handleStyleChange(11)} />
+              <input type="radio" name="bottom" onChange={() => handleStyleChange2(2)} />
               <span className="checkmark"></span>
             </label>
             <Tooltip id="my-bottom-pant3" className='opacity-100' >
@@ -315,7 +350,7 @@ function MainScenes() {
             </Tooltip>
             <div className="text-white text-[13px] mt-[10px]">CUFF STYLE</div>
             <label className="container text-white text-[8px] mt-[10px]" data-tooltip-id="my-bottom-cuff" data-tooltip-place="top">T-3605
-              <input type="radio" name="bottom" onChange={() => handleStyleChange(12)} />
+              <input type="radio" name="bottom" onChange={() => handleStyleChange2(3)} />
               <span className="checkmark"></span>
             </label>
             <Tooltip id="my-bottom-cuff" className='opacity-100' >
@@ -325,7 +360,7 @@ function MainScenes() {
               </div>
             </Tooltip>
             <label className="container text-white mt-[10px]" data-tooltip-id="my-bottom-front1" data-tooltip-place="top">T-3606
-              <input type="radio" name="bottom" onChange={() => handleStyleChange(13)} />
+              <input type="radio" name="bottom" onChange={() => handleStyleChange2(4)} />
               <span className="checkmark"></span>
             </label>
             <Tooltip id="my-bottom-front1" className='opacity-100' >
@@ -335,7 +370,7 @@ function MainScenes() {
               </div>
             </Tooltip>
             <label className="container text-white mt-[10px]" data-tooltip-id="my-bottom-front2" data-tooltip-place="top">T-3627
-              <input type="radio" name="bottom" onChange={() => handleStyleChange(14)} />
+              <input type="radio" name="bottom" onChange={() => handleStyleChange2(5)} />
               <span className="checkmark"></span>
             </label>
             <Tooltip id="my-bottom-front2" className='opacity-100' >
